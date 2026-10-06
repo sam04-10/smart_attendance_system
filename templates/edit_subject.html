@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Edit Subject</title>
+
+    <style>
+
+        body {
+            font-family: Arial;
+            background: #f4f6f9;
+            padding: 40px;
+        }
+
+        .container {
+            width: 500px;
+            margin: auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px #ccc;
+        }
+
+        h2 {
+            text-align: center;
+        }
+
+        label {
+            display: block;
+            margin-top: 15px;
+            font-weight: bold;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            box-sizing: border-box;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            margin-top: 20px;
+            background: #2563eb;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        a {
+            display: block;
+            text-align: center;
+            margin-top: 15px;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <h2>Edit Subject</h2>
+
+    <form method="POST"
+          action="/update-subject/{{ subject['id'] }}">
+
+        <label>Subject Name</label>
+
+        <input
+            type="text"
+            name="subject_name"
+            value="{{ subject['subject_name'] }}"
+            required
+        >
+
+
+        <label>Subject Code</label>
+
+        <input
+            type="text"
+            name="subject_code"
+            value="{{ subject['subject_code'] }}"
+            required
+        >
+
+
+        <label>Faculty Name</label>
+
+        <input
+            type="text"
+            name="faculty_name"
+            value="{{ subject['faculty_name'] }}"
+            required
+        >
+
+
+        <button type="submit">
+            Update Subject
+        </button>
+
+    </form>
+
+
+    <a href="/subjects">
+        ← Back to Subjects
+    </a>
+
+</div>
+
+</body>
+
+</html>
