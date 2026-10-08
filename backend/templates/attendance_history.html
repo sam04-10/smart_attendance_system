@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Attendance History</title>
+
+    <style>
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f4f6f9;
+        }
+
+
+        /* NAVBAR */
+
+        .navbar {
+            background: #1e293b;
+            color: white;
+            padding: 18px 30px;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .navbar h2 {
+            margin: 0;
+        }
+
+
+        .logout {
+            color: white;
+            text-decoration: none;
+            background: #dc2626;
+            padding: 9px 15px;
+            border-radius: 5px;
+        }
+
+
+        /* CONTAINER */
+
+        .container {
+            max-width: 1100px;
+            margin: 30px auto;
+            padding: 20px;
+        }
+
+
+        /* HEADER */
+
+        .header {
+            background: #1e293b;
+            color: white;
+            padding: 30px;
+            border-radius: 10px;
+            margin-bottom: 25px;
+        }
+
+        .header h1 {
+            margin-top: 0;
+        }
+
+
+        /* TABLE */
+
+        table {
+            width: 100%;
+            background: white;
+            border-collapse: collapse;
+            box-shadow: 0 2px 8px #ddd;
+        }
+
+
+        th {
+            background: #2563eb;
+            color: white;
+            padding: 15px;
+        }
+
+
+        td {
+            padding: 14px;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+        }
+
+
+        /* PRESENT */
+
+        .present {
+            color: #15803d;
+            background: #dcfce7;
+            font-weight: bold;
+            padding: 6px 12px;
+            border-radius: 5px;
+        }
+
+
+        /* ABSENT */
+
+        .absent {
+            color: #dc2626;
+            background: #fee2e2;
+            font-weight: bold;
+            padding: 6px 12px;
+            border-radius: 5px;
+        }
+
+
+        /* METHOD */
+
+        .method {
+            font-weight: bold;
+            color: #475569;
+        }
+
+
+        /* BACK */
+
+        .back-link {
+            display: inline-block;
+            margin-top: 20px;
+            text-decoration: none;
+            color: #2563eb;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- NAVBAR -->
+
+<div class="navbar">
+
+    <h2>
+        Smart Attendance
+    </h2>
+
+    <a
+        href="/logout"
+        class="logout"
+    >
+        Logout
+    </a>
+
+</div>
+
+
+<div class="container">
+
+
+    <!-- HEADER -->
+
+    <div class="header">
+
+        <h1>
+            Attendance History
+        </h1>
+
+        <p>
+            {{ student['name'] }}
+            |
+            Roll No: {{ student['roll_no'] }}
+        </p>
+
+    </div>
+
+
+    <!-- TABLE -->
+
+    <table>
+
+        <tr>
+
+            <th>
+                Date
+            </th>
+
+            <th>
+                Subject Code
+            </th>
+
+            <th>
+                Subject
+            </th>
+
+            <th>
+                Status
+            </th>
+
+            <th>
+                Method
+            </th>
+
+            <th>
+                Marked At
+            </th>
+
+        </tr>
+
+
+        {% for record in attendance %}
+
+        <tr>
+
+            <td>
+                {{ record['attendance_date'] }}
+            </td>
+
+            <td>
+                {{ record['subject_code'] }}
+            </td>
+
+            <td>
+                {{ record['subject_name'] }}
+            </td>
+
+
+            <td>
+
+                {% if record['status'] == 'Present' %}
+
+                <span class="present">
+                    Present
+                </span>
+
+                {% else %}
+
+                <span class="absent">
+                    Absent
+                </span>
+
+                {% endif %}
+
+            </td>
+
+
+            <td class="method">
+
+                {{ record['method'] }}
+
+            </td>
+
+
+            <td>
+
+                {{ record['marked_at'] }}
+
+            </td>
+
+        </tr>
+
+        {% endfor %}
+
+
+    </table>
+
+
+    <a
+        href="/student-dashboard"
+        class="back-link"
+    >
+        ← Back to Dashboard
+    </a>
+
+
+</div>
+
+
+</body>
+
+</html>

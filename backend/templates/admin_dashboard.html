@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Admin Dashboard</title>
+
+    <style>
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f4f6f9;
+        }
+
+        .navbar {
+            background: #1e293b;
+            color: white;
+            padding: 18px 30px;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .navbar h2 {
+            margin: 0;
+        }
+
+        .logout {
+            color: white;
+            text-decoration: none;
+            background: #dc2626;
+            padding: 9px 15px;
+            border-radius: 5px;
+        }
+
+        .container {
+            padding: 35px;
+        }
+
+        .welcome {
+            margin-bottom: 25px;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin-bottom: 35px;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 2px 8px #ddd;
+        }
+
+        .stat-card h2 {
+            margin: 0;
+            font-size: 30px;
+        }
+
+        .stat-card p {
+            color: #666;
+        }
+
+        .menu {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .menu-card {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            text-decoration: none;
+            color: #1e293b;
+            box-shadow: 0 2px 8px #ddd;
+        }
+
+        .menu-card:hover {
+            transform: translateY(-3px);
+        }
+
+        .menu-card h3 {
+            margin-top: 0;
+        }
+
+        .menu-card p {
+            color: #666;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div class="navbar">
+
+    <h2>
+        Smart Attendance - Admin
+    </h2>
+
+
+    <a
+        href="/logout"
+        class="logout"
+    >
+        Logout
+    </a>
+
+</div>
+
+
+<div class="container">
+
+
+    <div class="welcome">
+
+        <h1>
+            Faculty Dashboard
+        </h1>
+
+        <p>
+            Manage students, subjects and attendance from one place.
+        </p>
+
+    </div>
+
+
+    <div class="stats">
+
+
+        <div class="stat-card">
+
+            <h2>
+                {{ total_students }}
+            </h2>
+
+            <p>
+                Total Students
+            </p>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <h2>
+                {{ present_today }}
+            </h2>
+
+            <p>
+                Present Today
+            </p>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <h2>
+                {{ absent_today }}
+            </h2>
+
+            <p>
+                Absent Today
+            </p>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <h2>
+                {{ low_attendance }}
+            </h2>
+
+            <p>
+                Low Attendance
+            </p>
+
+        </div>
+
+
+    </div>
+
+
+    <div class="menu">
+
+
+        <a
+            href="/students"
+            class="menu-card"
+        >
+
+            <h3>
+                Student Management
+            </h3>
+
+            <p>
+                Add, edit, view and delete students.
+            </p>
+
+        </a>
+
+
+        <a
+            href="/subjects"
+            class="menu-card"
+        >
+
+            <h3>
+                Subject Management
+            </h3>
+
+            <p>
+                Add, edit, view and delete subjects.
+            </p>
+
+        </a>
+
+
+        <a
+            href="/manual-attendance"
+            class="menu-card"
+        >
+
+            <h3>
+                Manual Attendance
+            </h3>
+
+            <p>
+                Mark attendance manually.
+            </p>
+
+        </a>
+
+
+        <a
+            href="#"
+            class="menu-card"
+        >
+
+            <h3>
+                Camera Attendance
+            </h3>
+
+            <p>
+                Mark attendance using laptop camera.
+            </p>
+
+        </a>
+
+
+        <a
+            href="/generate-attendance-sheet"
+            class="menu-card"
+        >
+
+            <h3>
+                Generate Attendance Sheet
+            </h3>
+
+            <p>
+                Create and print a student attendance sheet.
+            </p>
+
+        </a>
+
+
+        <a
+            href="/upload-attendance-sheet"
+            class="menu-card"
+        >
+
+            <h3>
+                Upload Attendance Sheet
+            </h3>
+
+            <p>
+                Upload and process attendance sheets.
+            </p>
+
+        </a>
+
+
+        <a
+            href="#"
+            class="menu-card"
+        >
+
+            <h3>
+                Reports
+            </h3>
+
+            <p>
+                View and export attendance reports.
+            </p>
+
+        </a>
+
+
+        <a
+            href="/admin-notifications"
+            class="menu-card"
+        >
+
+            <h3>
+                Notifications
+            </h3>
+
+            <p>
+                Send announcements and alerts.
+            </p>
+
+        </a>
+
+
+    </div>
+
+
+</div>
+
+
+</body>
+
+</html>

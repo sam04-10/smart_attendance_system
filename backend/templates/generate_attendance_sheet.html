@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Generate Attendance Sheet</title>
+
+    <style>
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f4f6f9;
+        }
+
+        .navbar {
+            background: #1e293b;
+            color: white;
+            padding: 18px 30px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        .header {
+            background: #1e293b;
+            color: white;
+            padding: 30px;
+            border-radius: 10px;
+            margin-bottom: 25px;
+        }
+
+        .card {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px #ddd;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        select,
+        input[type="date"] {
+            width: 100%;
+            padding: 12px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 15px;
+        }
+
+        .generate-btn {
+            padding: 13px 25px;
+            background: #2563eb;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .generate-btn:hover {
+            background: #1d4ed8;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 20px;
+            color: #2563eb;
+            text-decoration: none;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div class="navbar">
+
+    <h2>
+        Smart Attendance - Admin
+    </h2>
+
+</div>
+
+
+<div class="container">
+
+
+    <div class="header">
+
+        <h1>
+            Generate Attendance Sheet
+        </h1>
+
+        <p>
+            Create a printable attendance sheet for the selected subject.
+        </p>
+
+    </div>
+
+
+    <div class="card">
+
+
+        <form method="POST">
+
+
+            <!-- SUBJECT -->
+
+            <div class="form-group">
+
+                <label>
+                    Select Subject
+                </label>
+
+
+                <select
+                    name="subject_id"
+                    required
+                >
+
+                    <option value="">
+                        Select Subject
+                    </option>
+
+
+                    {% for subject in subjects %}
+
+                    <option value="{{ subject['id'] }}">
+
+                        {{ subject['subject_code'] }}
+                        -
+                        {{ subject['subject_name'] }}
+
+                    </option>
+
+                    {% endfor %}
+
+                </select>
+
+            </div>
+
+
+            <!-- DATE -->
+
+            <div class="form-group">
+
+                <label>
+                    Attendance Date
+                </label>
+
+
+                <input
+                    type="date"
+                    name="attendance_date"
+                    value="{{ today }}"
+                    required
+                >
+
+            </div>
+
+
+            <button
+                type="submit"
+                class="generate-btn"
+            >
+                Generate Sheet
+            </button>
+
+
+        </form>
+
+
+    </div>
+
+
+    <a
+        href="/admin-dashboard"
+        class="back-link"
+    >
+        ← Back to Admin Dashboard
+    </a>
+
+
+</div>
+
+
+</body>
+
+</html>

@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Upload Attendance Sheet</title>
+
+    <style>
+
+        body {
+
+            margin: 0;
+
+            font-family: Arial, sans-serif;
+
+            background: #f4f6f9;
+
+        }
+
+
+        /* NAVBAR */
+
+        .navbar {
+
+            background: #1e293b;
+
+            color: white;
+
+            padding: 18px 30px;
+
+        }
+
+
+        .navbar h2 {
+
+            margin: 0;
+
+        }
+
+
+        /* CONTAINER */
+
+        .container {
+
+            max-width: 1000px;
+
+            margin: 30px auto;
+
+            padding: 20px;
+
+        }
+
+
+        /* HEADER */
+
+        .header {
+
+            background: #1e293b;
+
+            color: white;
+
+            padding: 30px;
+
+            border-radius: 10px;
+
+            margin-bottom: 25px;
+
+        }
+
+
+        .header h1 {
+
+            margin-top: 0;
+
+        }
+
+
+        /* CARD */
+
+        .card {
+
+            background: white;
+
+            padding: 30px;
+
+            border-radius: 10px;
+
+            box-shadow: 0 2px 8px #ddd;
+
+        }
+
+
+        /* FORM */
+
+        .form-group {
+
+            margin-bottom: 20px;
+
+        }
+
+
+        .form-group label {
+
+            display: block;
+
+            font-weight: bold;
+
+            margin-bottom: 8px;
+
+        }
+
+
+        select,
+        input[type="date"],
+        input[type="file"] {
+
+            width: 100%;
+
+            padding: 12px;
+
+            box-sizing: border-box;
+
+            border: 1px solid #ccc;
+
+            border-radius: 6px;
+
+            font-size: 14px;
+
+        }
+
+
+        /* UPLOAD BUTTON */
+
+        .upload-btn {
+
+            margin-top: 10px;
+
+            padding: 13px 25px;
+
+            background: #2563eb;
+
+            color: white;
+
+            border: none;
+
+            border-radius: 6px;
+
+            font-size: 16px;
+
+            cursor: pointer;
+
+        }
+
+
+        .upload-btn:hover {
+
+            background: #1d4ed8;
+
+        }
+
+
+        /* MESSAGE */
+
+        .success {
+
+            background: #dcfce7;
+
+            color: #15803d;
+
+            padding: 15px;
+
+            border-radius: 6px;
+
+            margin-bottom: 20px;
+
+            font-weight: bold;
+
+        }
+
+
+        /* PREVIEW */
+
+        .preview {
+
+            margin-top: 30px;
+
+            padding-top: 25px;
+
+            border-top: 1px solid #ddd;
+
+        }
+
+
+        .preview img {
+
+            max-width: 100%;
+
+            max-height: 600px;
+
+            display: block;
+
+            margin-top: 15px;
+
+            border: 1px solid #ddd;
+
+            border-radius: 8px;
+
+        }
+
+
+        .back-link {
+
+            display: inline-block;
+
+            margin-top: 20px;
+
+            text-decoration: none;
+
+            color: #2563eb;
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- NAVBAR -->
+
+<div class="navbar">
+
+    <h2>
+        Smart Attendance - Admin
+    </h2>
+
+</div>
+
+
+<div class="container">
+
+
+    <!-- HEADER -->
+
+    <div class="header">
+
+        <h1>
+            Upload Attendance Sheet
+        </h1>
+
+        <p>
+            Upload an attendance sheet to process student attendance.
+        </p>
+
+    </div>
+
+
+    <!-- CARD -->
+
+    <div class="card">
+
+
+        {% if message %}
+
+        <div class="success">
+
+            {{ message }}
+
+        </div>
+
+        {% endif %}
+
+
+        <!-- FORM -->
+
+        <form
+            method="POST"
+            enctype="multipart/form-data"
+        >
+
+
+            <!-- SUBJECT -->
+
+            <div class="form-group">
+
+                <label>
+                    Select Subject
+                </label>
+
+
+                <select
+                    name="subject_id"
+                    required
+                >
+
+                    <option value="">
+                        Select Subject
+                    </option>
+
+
+                    {% for subject in subjects %}
+
+                    <option
+                        value="{{ subject['id'] }}"
+                    >
+
+                        {{ subject['subject_code'] }}
+                        -
+                        {{ subject['subject_name'] }}
+
+                    </option>
+
+                    {% endfor %}
+
+                </select>
+
+            </div>
+
+
+            <!-- DATE -->
+
+            <div class="form-group">
+
+                <label>
+                    Attendance Date
+                </label>
+
+
+                <input
+                    type="date"
+                    name="attendance_date"
+                    value="{{ selected_date or '' }}"
+                    required
+                >
+
+            </div>
+
+
+            <!-- FILE -->
+
+            <div class="form-group">
+
+                <label>
+                    Attendance Sheet
+                </label>
+
+
+                <input
+                    type="file"
+                    name="attendance_file"
+                    accept=".png,.jpg,.jpeg"
+                    required
+                >
+
+            </div>
+
+
+            <!-- BUTTON -->
+
+            <button
+                type="submit"
+                class="upload-btn"
+            >
+                Upload Attendance Sheet
+            </button>
+
+
+        </form>
+
+
+        {% if uploaded_file %}
+
+
+        <!-- PREVIEW -->
+
+        <div class="preview">
+
+            <h2>
+                Uploaded Sheet
+            </h2>
+
+
+            <p>
+
+                <strong>
+                    File:
+                </strong>
+
+                {{ original_name }}
+
+            </p>
+
+
+            {% if selected_subject %}
+
+            <p>
+
+                <strong>
+                    Subject:
+                </strong>
+
+                {{ selected_subject['subject_code'] }}
+                -
+                {{ selected_subject['subject_name'] }}
+
+            </p>
+
+            {% endif %}
+
+
+            <p>
+
+                <strong>
+                    Date:
+                </strong>
+
+                {{ selected_date }}
+
+            </p>
+
+
+            <img
+                src="{{ url_for('static', filename='../uploads/' + uploaded_file) }}"
+                alt="Uploaded Attendance Sheet"
+            >
+
+        </div>
+
+
+        {% endif %}
+
+
+    </div>
+
+
+    <a
+        href="/admin-dashboard"
+        class="back-link"
+    >
+        ← Back to Admin Dashboard
+    </a>
+
+
+</div>
+
+
+</body>
+
+</html>

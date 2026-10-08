@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Student Management</title>
+
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+
+            margin: 0;
+
+            padding: 0;
+
+            font-family: Arial, sans-serif;
+        }
+
+
+        body {
+
+            background: #f4f6f9;
+
+        }
+
+
+        .navbar {
+
+            background: #111827;
+
+            color: white;
+
+            padding: 18px 30px;
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+        }
+
+
+        .navbar a {
+
+            color: white;
+
+            text-decoration: none;
+
+            margin-left: 15px;
+
+        }
+
+
+        .container {
+
+            padding: 30px;
+
+        }
+
+
+        .form-box {
+
+            background: white;
+
+            padding: 25px;
+
+            border-radius: 10px;
+
+            margin-bottom: 30px;
+
+            box-shadow:
+                0 3px 12px rgba(0,0,0,0.08);
+
+        }
+
+
+        .form-box h2 {
+
+            margin-bottom: 20px;
+
+        }
+
+
+        .form-grid {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(auto-fit, minmax(200px, 1fr));
+
+            gap: 15px;
+
+        }
+
+
+        input {
+
+            width: 100%;
+
+            padding: 11px;
+
+            border: 1px solid #d1d5db;
+
+            border-radius: 6px;
+
+        }
+
+
+        button {
+
+            padding: 11px 20px;
+
+            border: none;
+
+            border-radius: 6px;
+
+            background: #2563eb;
+
+            color: white;
+
+            cursor: pointer;
+
+            margin-top: 15px;
+
+        }
+
+
+        button:hover {
+
+            background: #1d4ed8;
+
+        }
+
+
+        .table-box {
+
+            background: white;
+
+            padding: 25px;
+
+            border-radius: 10px;
+
+            box-shadow:
+                0 3px 12px rgba(0,0,0,0.08);
+
+            overflow-x: auto;
+
+        }
+
+
+        table {
+
+            width: 100%;
+
+            border-collapse: collapse;
+
+            margin-top: 15px;
+
+        }
+
+
+        th, td {
+
+            padding: 12px;
+
+            text-align: left;
+
+            border-bottom: 1px solid #e5e7eb;
+
+        }
+
+
+        th {
+
+            background: #f3f4f6;
+
+        }
+
+
+        .delete {
+
+            background: #dc2626;
+
+            margin-top: 0;
+
+        }
+
+
+        .delete:hover {
+
+            background: #b91c1c;
+
+        }
+
+
+        .edit {
+
+            background: #16a34a;
+
+            margin-top: 0;
+
+        }
+
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <div class="navbar">
+
+        <h2>Student Management</h2>
+
+
+        <div>
+
+            <a href="/admin-dashboard">
+                Dashboard
+            </a>
+
+            <a href="/">
+                Logout
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <div class="container">
+
+
+        <div class="form-box">
+
+            <h2>Add Student</h2>
+
+
+            <form action="/add-student"
+                  method="POST">
+
+
+                <div class="form-grid">
+
+
+                    <input
+                        type="text"
+                        name="name"
+                        placeholder="Student Name"
+                        required
+                    >
+
+
+                    <input
+                        type="text"
+                        name="roll_no"
+                        placeholder="Roll Number"
+                        required
+                    >
+
+
+                    <input
+                        type="email"
+                        name="email"
+                        placeholder="Email"
+                        required
+                    >
+
+
+                    <input
+                        type="text"
+                        name="division"
+                        placeholder="Division"
+                        required
+                    >
+
+
+                    <input
+                        type="text"
+                        name="department"
+                        placeholder="Department"
+                        required
+                    >
+
+
+                    <input
+                        type="number"
+                        name="semester"
+                        placeholder="Semester"
+                        min="1"
+                        max="8"
+                        required
+                    >
+
+
+                </div>
+
+
+                <button type="submit">
+                    Add Student
+                </button>
+
+
+            </form>
+
+        </div>
+
+
+
+        <div class="table-box">
+
+
+            <h2>Registered Students</h2>
+
+
+            <table>
+
+
+                <tr>
+
+                    <th>ID</th>
+
+                    <th>Name</th>
+
+                    <th>Roll No.</th>
+
+                    <th>Email</th>
+
+                    <th>Division</th>
+
+                    <th>Department</th>
+
+                    <th>Semester</th>
+
+                    <th>Action</th>
+
+                </tr>
+
+
+                {% for student in students %}
+
+
+                <tr>
+
+                    <td>
+                        {{ student["id"] }}
+                    </td>
+
+                    <td>
+                        {{ student["name"] }}
+                    </td>
+
+                    <td>
+                        {{ student["roll_no"] }}
+                    </td>
+
+                    <td>
+                        {{ student["email"] }}
+                    </td>
+
+                    <td>
+                        {{ student["division"] }}
+                    </td>
+
+                    <td>
+                        {{ student["department"] }}
+                    </td>
+
+                    <td>
+                        {{ student["semester"] }}
+                    </td>
+
+                   <td>
+
+    <a href="/edit-student/{{ student['id'] }}">
+        <button type="button">
+            Edit
+        </button>
+    </a>
+
+
+    <form method="POST"
+          action="/delete-student/{{ student['id'] }}"
+          style="display:inline;">
+
+        <button type="submit">
+            Delete
+        </button>
+
+    </form>
+
+</td>
+
+                </tr>
+
+
+                {% endfor %}
+
+
+            </table>
+
+
+        </div>
+
+
+    </div>
+
+
+</body>
+
+</html>

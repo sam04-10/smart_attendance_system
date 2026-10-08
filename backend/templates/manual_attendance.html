@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Manual Attendance</title>
+
+    <style>
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f4f6f9;
+        }
+
+        /* NAVBAR */
+
+        .navbar {
+            background: #1e293b;
+            color: white;
+            padding: 18px 30px;
+        }
+
+        .navbar h2 {
+            margin: 0;
+        }
+
+
+        /* MAIN CONTAINER */
+
+        .container {
+            max-width: 1100px;
+            margin: 30px auto;
+            padding: 20px;
+        }
+
+
+        /* HEADER */
+
+        .header {
+            background: #1e293b;
+            color: white;
+            padding: 30px;
+            border-radius: 10px;
+            margin-bottom: 25px;
+        }
+
+        .header h1 {
+            margin: 0 0 10px 0;
+        }
+
+        .header p {
+            margin: 0;
+        }
+
+
+        /* SUBJECT + DATE */
+
+        .selection-box {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            margin-bottom: 25px;
+            box-shadow: 0 2px 8px #ddd;
+        }
+
+        .selection-box label {
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        select,
+        input[type="date"] {
+            padding: 10px;
+            margin-right: 25px;
+            font-size: 14px;
+        }
+
+
+        /* TABLE */
+
+        table {
+            width: 100%;
+            background: white;
+            border-collapse: collapse;
+            box-shadow: 0 2px 8px #ddd;
+        }
+
+        th {
+            background: #2563eb;
+            color: white;
+            padding: 15px;
+            font-size: 16px;
+        }
+
+        td {
+            padding: 15px;
+            border-bottom: 1px solid #ddd;
+            text-align: center;
+        }
+
+        tr:hover {
+            background: #f8fafc;
+        }
+
+
+        /* ATTENDANCE */
+
+        .attendance-control {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+        }
+
+
+        /* HIDE REAL CHECKBOX */
+
+        .attendance-checkbox {
+            display: none;
+        }
+
+
+        /* CUSTOM CHECKBOX */
+
+        .custom-checkbox {
+
+            width: 28px;
+            height: 28px;
+
+            border: 3px solid #dc2626;
+            background: #fee2e2;
+
+            border-radius: 6px;
+
+            display: inline-flex;
+
+            align-items: center;
+            justify-content: center;
+
+            cursor: pointer;
+
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+
+        /* PRESENT */
+
+        .attendance-checkbox:checked + .custom-checkbox {
+
+            background: #16a34a;
+            border-color: #15803d;
+        }
+
+
+        .attendance-checkbox:checked + .custom-checkbox::after {
+
+            content: "✓";
+            color: white;
+        }
+
+
+        /* STATUS TEXT */
+
+        .status-text {
+
+            font-weight: bold;
+            color: #dc2626;
+
+            cursor: pointer;
+        }
+
+
+        .attendance-checkbox:checked ~ .status-text {
+
+            color: #15803d;
+        }
+
+
+        /* SAVE BUTTON */
+
+        .save-btn {
+
+            margin-top: 25px;
+
+            padding: 13px 30px;
+
+            background: #16a34a;
+            color: white;
+
+            border: none;
+
+            border-radius: 6px;
+
+            font-size: 16px;
+
+            cursor: pointer;
+        }
+
+
+        .save-btn:hover {
+
+            background: #15803d;
+        }
+
+
+        /* BACK LINK */
+
+        .back-link {
+
+            display: inline-block;
+
+            margin-top: 20px;
+
+            text-decoration: none;
+
+            color: #2563eb;
+
+            font-size: 16px;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- NAVBAR -->
+
+<div class="navbar">
+
+    <h2>
+        Smart Attendance - Manual Attendance
+    </h2>
+
+</div>
+
+
+<div class="container">
+
+
+    <!-- HEADER -->
+
+    <div class="header">
+
+        <h1>
+            Manual Attendance
+        </h1>
+
+        <p>
+            Faculty can manually mark student attendance.
+        </p>
+
+    </div>
+
+
+    <!-- FORM -->
+
+    <form method="POST"
+          action="/manual-attendance">
+
+
+        <!-- SUBJECT AND DATE -->
+
+        <div class="selection-box">
+
+            <label>
+                Subject:
+            </label>
+
+
+            <select
+                name="subject_id"
+                required
+            >
+
+                <option value="">
+                    Select Subject
+                </option>
+
+
+                {% for subject in subjects %}
+
+                <option value="{{ subject['id'] }}">
+
+                    {{ subject['subject_code'] }}
+                    -
+                    {{ subject['subject_name'] }}
+
+                </option>
+
+                {% endfor %}
+
+            </select>
+
+
+            <label>
+                Date:
+            </label>
+
+
+            <input
+                type="date"
+                name="attendance_date"
+                value="{{ today }}"
+                required
+            >
+
+        </div>
+
+
+        <!-- STUDENT TABLE -->
+
+        <table>
+
+            <tr>
+
+                <th>
+                    Roll No.
+                </th>
+
+                <th>
+                    Student Name
+                </th>
+
+                <th>
+                    Division
+                </th>
+
+                <th>
+                    Attendance Status
+                </th>
+
+            </tr>
+
+
+            {% for student in students %}
+
+            <tr>
+
+
+                <td>
+                    {{ student['roll_no'] }}
+                </td>
+
+
+                <td>
+                    {{ student['name'] }}
+                </td>
+
+
+                <td>
+                    {{ student['division'] }}
+                </td>
+
+
+                <td>
+
+
+                    <div class="attendance-control">
+
+
+                        <!--
+                            HIDDEN VALUE
+                            Flask receives Present/Absent
+                        -->
+
+                        <input
+                            type="hidden"
+                            name="status_{{ student['id'] }}"
+                            id="status_{{ student['id'] }}"
+                            value="Present"
+                        >
+
+
+                        <!-- CHECKBOX -->
+
+                        <input
+                            type="checkbox"
+                            class="attendance-checkbox"
+                            id="attendance_{{ student['id'] }}"
+                            checked
+                            onchange="changeAttendance({{ student['id'] }})"
+                        >
+
+
+                        <!-- CUSTOM TICK BOX -->
+
+                        <label
+                            for="attendance_{{ student['id'] }}"
+                            class="custom-checkbox"
+                        >
+                        </label>
+
+
+                        <!-- STATUS -->
+
+                        <label
+                            for="attendance_{{ student['id'] }}"
+                            class="status-text"
+                            id="text_{{ student['id'] }}"
+                        >
+                            Present
+                        </label>
+
+
+                    </div>
+
+
+                </td>
+
+
+            </tr>
+
+            {% endfor %}
+
+
+        </table>
+
+
+        <!-- SAVE -->
+
+        <button
+            type="submit"
+            class="save-btn"
+        >
+            Save Attendance
+        </button>
+
+
+    </form>
+
+
+    <!-- BACK -->
+
+    <a
+        href="/admin-dashboard"
+        class="back-link"
+    >
+        ← Back to Admin Dashboard
+    </a>
+
+
+</div>
+
+
+<!-- JAVASCRIPT -->
+
+<script>
+
+    function changeAttendance(studentId) {
+
+        const checkbox =
+            document.getElementById(
+                "attendance_" + studentId
+            );
+
+
+        const status =
+            document.getElementById(
+                "status_" + studentId
+            );
+
+
+        const text =
+            document.getElementById(
+                "text_" + studentId
+            );
+
+
+        if (checkbox.checked) {
+
+            status.value = "Present";
+
+            text.innerText = "Present";
+
+        }
+
+        else {
+
+            status.value = "Absent";
+
+            text.innerText = "Absent";
+
+        }
+
+    }
+
+</script>
+
+
+</body>
+
+</html>

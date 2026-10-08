@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Notifications</title>
+
+    <style>
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f4f6f9;
+        }
+
+        .navbar {
+            background: #1e293b;
+            color: white;
+            padding: 18px 30px;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .navbar h2 {
+            margin: 0;
+        }
+
+        .logout {
+            color: white;
+            text-decoration: none;
+            background: #dc2626;
+            padding: 9px 15px;
+            border-radius: 5px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 30px auto;
+            padding: 20px;
+        }
+
+        .header {
+            background: #1e293b;
+            color: white;
+            padding: 30px;
+            border-radius: 10px;
+            margin-bottom: 25px;
+        }
+
+        .notification {
+            background: white;
+            padding: 22px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 8px #ddd;
+            border-left: 5px solid #2563eb;
+        }
+
+        .notification h3 {
+            margin-top: 0;
+        }
+
+        .notification p {
+            color: #555;
+        }
+
+        .date {
+            color: #888;
+            font-size: 13px;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 20px;
+            color: #2563eb;
+            text-decoration: none;
+        }
+
+        .empty {
+            background: white;
+            padding: 30px;
+            text-align: center;
+            border-radius: 10px;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+
+<div class="navbar">
+
+    <h2>
+        Smart Attendance
+    </h2>
+
+    <a
+        href="/logout"
+        class="logout"
+    >
+        Logout
+    </a>
+
+</div>
+
+
+<div class="container">
+
+
+    <div class="header">
+
+        <h1>
+            Notifications
+        </h1>
+
+        <p>
+            Attendance updates and faculty announcements.
+        </p>
+
+    </div>
+
+
+    {% if notifications %}
+
+
+        {% for notification in notifications %}
+
+        <div class="notification">
+
+            <h3>
+                {{ notification['title'] }}
+            </h3>
+
+            <p>
+                {{ notification['message'] }}
+            </p>
+
+            <div class="date">
+
+                {{ notification['created_at'] }}
+
+            </div>
+
+        </div>
+
+        {% endfor %}
+
+
+    {% else %}
+
+        <div class="empty">
+
+            <h3>
+                No Notifications
+            </h3>
+
+            <p>
+                You currently have no notifications.
+            </p>
+
+        </div>
+
+    {% endif %}
+
+
+    <a
+        href="/student-dashboard"
+        class="back-link"
+    >
+        ← Back to Dashboard
+    </a>
+
+
+</div>
+
+
+</body>
+
+</html>
