@@ -110,7 +110,15 @@ tbody tr:last-child td { border-bottom: 0; }
 .tag.present { color: #226346; background: #e3f3e8; }
 .tag.absent { color: #a34138; background: #fae9e5; }
 .tag.late { color: #895c17; background: #fbf0d7; }
+<<<<<<< HEAD
 .empty-state { padding: 16px 0; color: var(--muted); font-size: 12px; }
+=======
+.tag.method { color: #235c8a; background: #e5f1fb; }
+.empty-state { padding: 16px 0; color: var(--muted); font-size: 12px; }
+.attendance-filters { margin: 0 0 12px; display: grid; grid-template-columns: minmax(160px, 1fr) minmax(145px, .45fr) minmax(125px, .35fr); gap: 8px; }
+.attendance-filters input, .attendance-filters select { min-width: 0; padding: 8px 10px; border: 1px solid #ccd7cf; border-radius: 5px; color: var(--ink); background: #fff; font-size: 11px; }
+.attendance-filters input:focus, .attendance-filters select:focus { outline: 2px solid rgba(37,106,77,.2); border-color: var(--green); }
+>>>>>>> b4694a3415ac9f3a74c1838e4afc440337f3386c
 
 .workflow-panel { min-height: 420px; }
 .workflow-panel > .section-heading { margin-bottom: 24px; }
@@ -130,8 +138,34 @@ tbody tr:last-child td { border-bottom: 0; }
 .enrollment-table { margin-top: 25px; }
 .text-button { padding: 4px; border: 0; color: var(--green); background: transparent; font-size: 11px; font-weight: 700; }
 .danger-text { color: var(--red); }
+<<<<<<< HEAD
 .sheet-upload { margin-bottom: 20px; display: grid; grid-template-columns: 1fr 1.3fr auto; gap: 12px; align-items: end; }
 .sheet-upload input { padding: 8px; font-size: 11px; }
+=======
+.sheet-upload { margin-bottom: 20px; display: grid; grid-template-columns: minmax(180px, .8fr) minmax(220px, 1.2fr) auto; gap: 12px; align-items: end; }
+.sheet-upload input { padding: 8px; font-size: 11px; }
+.sheet-drop-zone { min-width: 0; padding: 11px; border: 1px dashed #aebeb2; border-radius: 5px; background: #f8faf6; }
+.sheet-drop-zone small { display: block; margin-top: 5px; color: var(--muted); font-size: 10px; }
+.sheet-actions { display: flex; align-items: center; gap: 8px; }
+.sheet-actions button { min-height: 40px; white-space: nowrap; font-size: 11px; }
+.sheet-camera { margin: 0 0 16px; display: flex; align-items: end; gap: 12px; }
+.sheet-camera video { width: min(100%, 480px); max-height: 280px; border-radius: 5px; background: #17261f; object-fit: contain; }
+.sheet-review-grid { display: grid; grid-template-columns: minmax(280px, .8fr) minmax(0, 1.2fr); gap: 18px; align-items: start; }
+.sheet-preview-panel, .sheet-checklist { min-width: 0; padding: 14px; border: 1px solid var(--line); border-radius: 5px; background: #fff; }
+.sheet-image-frame { min-height: 230px; max-height: 560px; overflow: auto; display: grid; place-items: center; background: #eef1ec; }
+.sheet-image-frame img { display: block; max-width: 100%; max-height: 520px; object-fit: contain; transition: transform .2s ease; }
+.image-edit-controls { margin-top: 12px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; align-items: center; }
+.image-edit-controls .secondary-button { padding: 7px 9px; font-size: 10px; }
+.image-edit-controls label { display: grid; gap: 3px; color: var(--muted); font-size: 10px; }
+.image-edit-controls input { width: 100%; }
+.file-preview { padding: 26px 12px; color: var(--muted); line-height: 1.8; overflow-wrap: anywhere; }
+.sheet-checklist .table-wrap { max-height: 520px; }
+.sheet-checklist td small { display: block; max-width: 185px; margin-top: 3px; overflow: hidden; color: var(--muted); text-overflow: ellipsis; font-size: 9px; }
+.confidence-label { color: var(--green); font-size: 10px; font-weight: 750; }
+.confidence-label.low-confidence { color: #a34138; }
+.needs-verification { background: #fffaf0; }
+.sheet-checklist select { max-width: 150px; padding: 7px; border: 1px solid #ccd7cf; border-radius: 4px; background: white; font-size: 10px; }
+>>>>>>> b4694a3415ac9f3a74c1838e4afc440337f3386c
 .review-banner { margin: 18px 0 8px; padding: 10px 12px; border-left: 3px solid #d8a64d; color: #71561f; background: #fff6df; font-size: 11px; }
 .confirm-button { margin-top: 15px; }
 .message { position: relative; margin: 10px 0; padding: 10px 12px; border-left: 3px solid #348061; border-radius: 3px; color: #24543f; background: #eaf4ec; font-size: 12px; }
@@ -212,8 +246,14 @@ tbody tr:last-child td { border-bottom: 0; }
   .today-label { display: none; }
   .context-bar { align-items: stretch; flex-direction: column; }
   .class-switch select { min-width: 0; flex: 1; }
+<<<<<<< HEAD
   .analytics-grid, .camera-layout, .enroll-layout, .student-lower { grid-template-columns: 1fr; }
   .sheet-upload { grid-template-columns: 1fr; }
+=======
+  .analytics-grid, .camera-layout, .enroll-layout, .student-lower, .sheet-review-grid { grid-template-columns: 1fr; }
+  .sheet-upload, .attendance-filters { grid-template-columns: 1fr; }
+  .sheet-actions { flex-wrap: wrap; }
+>>>>>>> b4694a3415ac9f3a74c1838e4afc440337f3386c
   .subject-grid { grid-template-columns: 1fr; }
   .class-create-form, .management-form, .attendance-toolbar { grid-template-columns: 1fr; }
   .date-context { justify-content: space-between; }

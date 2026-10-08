@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Student Dashboard</title>
+
+    <style>
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f4f6f9;
+        }
+
+        .navbar {
+            background: #1e293b;
+            color: white;
+            padding: 18px 30px;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .navbar h2 {
+            margin: 0;
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .notification-link {
+            color: white;
+            text-decoration: none;
+            background: #2563eb;
+            padding: 9px 15px;
+            border-radius: 5px;
+        }
+
+        .logout {
+            color: white;
+            text-decoration: none;
+            background: #dc2626;
+            padding: 9px 15px;
+            border-radius: 5px;
+        }
+
+        .badge {
+            background: #facc15;
+            color: #1e293b;
+            padding: 2px 7px;
+            border-radius: 10px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 30px auto;
+            padding: 20px;
+        }
+
+        .welcome {
+            margin-bottom: 25px;
+        }
+
+        .overall-card {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px #ddd;
+            margin-bottom: 30px;
+        }
+
+        .overall-card h2 {
+            margin-top: 0;
+        }
+
+        .percentage {
+            font-size: 45px;
+            font-weight: bold;
+            color: #2563eb;
+        }
+
+        .section-title {
+            margin-top: 30px;
+            margin-bottom: 20px;
+        }
+
+        .subjects {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .subject-card {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px #ddd;
+        }
+
+        .subject-card h3 {
+            margin-top: 0;
+        }
+
+        .subject-code {
+            color: #666;
+        }
+
+        .subject-percentage {
+            font-size: 28px;
+            font-weight: bold;
+            color: #16a34a;
+        }
+
+        .buttons {
+            margin-top: 30px;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 12px 20px;
+            margin-right: 10px;
+            text-decoration: none;
+            color: white;
+            background: #2563eb;
+            border-radius: 6px;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div class="navbar">
+
+    <h2>
+        Smart Attendance
+    </h2>
+
+
+    <div class="nav-right">
+
+        <a
+            href="/notifications"
+            class="notification-link"
+        >
+            Notifications
+
+            {% if unread_count > 0 %}
+
+            <span class="badge">
+                {{ unread_count }}
+            </span>
+
+            {% endif %}
+
+        </a>
+
+
+        <a
+            href="/logout"
+            class="logout"
+        >
+            Logout
+        </a>
+
+    </div>
+
+</div>
+
+
+<div class="container">
+
+
+    <div class="welcome">
+
+        <h1>
+            Welcome, {{ student['name'] }}
+        </h1>
+
+        <p>
+
+            Roll No:
+            {{ student['roll_no'] }}
+
+            |
+
+            Division:
+            {{ student['division'] }}
+
+        </p>
+
+    </div>
+
+
+    <div class="overall-card">
+
+        <h2>
+            Overall Attendance
+        </h2>
+
+        <div class="percentage">
+
+            {{ overall_percentage }}%
+
+        </div>
+
+        <p>
+
+            {{ present_classes }}
+
+            Present out of
+
+            {{ total_classes }}
+
+            total classes
+
+        </p>
+
+    </div>
+
+
+    <h2 class="section-title">
+        Subject-wise Attendance
+    </h2>
+
+
+    <div class="subjects">
+
+
+        {% for subject in subjects %}
+
+        <div class="subject-card">
+
+            <h3>
+                {{ subject['subject_name'] }}
+            </h3>
+
+            <p class="subject-code">
+                {{ subject['subject_code'] }}
+            </p>
+
+            <div class="subject-percentage">
+
+                {{ subject['percentage'] }}%
+
+            </div>
+
+            <p>
+
+                {{ subject['present_classes'] }}
+
+                Present /
+
+                {{ subject['total_classes'] }}
+
+                Classes
+
+            </p>
+
+        </div>
+
+        {% endfor %}
+
+
+    </div>
+
+
+    <div class="buttons">
+
+        <a
+            href="/attendance-history"
+            class="button"
+        >
+            Attendance History
+        </a>
+
+
+        <a
+            href="/notifications"
+            class="button"
+        >
+            Notifications
+        </a>
+
+    </div>
+
+
+</div>
+
+
+</body>
+
+</html>

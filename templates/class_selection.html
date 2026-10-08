@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Select Class</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: Arial, sans-serif; }
+        body { background: #f8fafc; color: #0f172a; }
+        .wrap { max-width: 760px; margin: 60px auto; background: white; border-radius: 14px; box-shadow: 0 20px 40px rgba(15, 23, 42, 0.08); padding: 28px; }
+        h1 { margin-bottom: 12px; }
+        p { color: #475569; margin-bottom: 22px; }
+        form { display: grid; gap: 16px; }
+        .field { display: grid; gap: 8px; }
+        select, button { width: 100%; padding: 12px 14px; border-radius: 8px; border: 1px solid #cbd5e1; }
+        button { background: #2563eb; color: white; border: none; cursor: pointer; }
+        .error { margin-top: 12px; background: #fee2e2; color: #991b1b; border-radius: 8px; padding: 10px 12px; }
+    </style>
+</head>
+<body>
+    <div class="wrap">
+        <h1>Select Class</h1>
+        <p>Choose the academic year, class, department, and division before continuing.</p>
+
+        <form method="POST" action="/class-selection">
+            <div class="field">
+                <label for="academic_year_id">Academic Year</label>
+                <select name="academic_year_id" id="academic_year_id" required>
+                    <option value="">Select academic year</option>
+                    {% for item in academic_years %}
+                        <option value="{{ item.id }}">{{ item.academic_year }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="field">
+                <label for="year">Year</label>
+                <select name="year" id="year" required>
+                    <option value="">Select year</option>
+                    <option>1st Year</option>
+                    <option>2nd Year</option>
+                    <option>3rd Year</option>
+                    <option>4th Year</option>
+                </select>
+            </div>
+
+            <div class="field">
+                <label for="department">Department</label>
+                <select name="department" id="department" required>
+                    <option value="">Select department</option>
+                    <option>Information Technology</option>
+                    <option>Computer Science</option>
+                    <option>Electronics</option>
+                </select>
+            </div>
+
+            <div class="field">
+                <label for="division">Division</label>
+                <select name="division" id="division" required>
+                    <option value="">Select division</option>
+                    <option>A</option>
+                    <option>B</option>
+                    <option>C</option>
+                </select>
+            </div>
+
+            <button type="submit">Continue</button>
+        </form>
+
+        {% if error %}
+        <div class="error">{{ error }}</div>
+        {% endif %}
+    </div>
+</body>
+</html>
